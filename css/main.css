@@ -18,6 +18,16 @@ body, h1{
     color: #FFF;
 }
 
+.test-data{
+    font-size: 20px;
+    margin: 20px 0px;
+    color:  #8e44ad;
+}
+
 main{
     padding: 20px
+}
+
+.mb-2{
+    margin-bottom: 2em;
 }

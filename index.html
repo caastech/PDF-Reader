@@ -16,7 +16,29 @@
     </header>
     <main>
 
-        <div id="clk-app"></div>
+        <div id="clk-app">
+            <div class="test-data">
+                {{ pdfData }}
+            </div>
+            
+            <!-- <custom-input @get-data="getContent" id="clkFile" type="file" title="Please enter your PDF file" 
+            :handler="true" 
+            ></custom-input> -->
+
+            <!-- <label for="clkFile">Please enter your PDF file</label><br>
+            <input @change="getPdfData" type="file" name="clk" id="clkFile" class="mb-2"><br>
+            
+            
+            <custom-input v-if="isChanged" v-for="(field,key) in fields" 
+            :key="key" 
+            :id="field.id"
+            :title="field.title"
+            :customValue="msg"
+            ></custom-input> -->
+
+
+
+        </div>
 
     </main>
     
