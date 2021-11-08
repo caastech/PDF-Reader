@@ -31,3 +31,9 @@ main{
 .mb-2{
     margin-bottom: 2em;
 }
+
+.container{
+    display: flex;
+    gap: 50px;
+    /* justify-content: space-between; */
+}

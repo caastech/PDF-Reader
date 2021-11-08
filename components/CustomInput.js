@@ -12,7 +12,7 @@ clkApp.component('custom-input',{
     template: 
     /*html*/
     `
-        <label :for="id">{{ title }} - {{ customValue }}</label><br>
+        <label :for="id">{{ title }}</label><br>
         <input class="custom" 
         :id="id" 
         :value="customValue"
