@@ -81,17 +81,17 @@ clkApp.component('textarea-input',{
 
                 if(adjuster !== ''){ adjuster } else {adjuster = ''}
                 
-                if(email !== ''){ email = `Email: ${email}` } else {email = ''}
+                if(email !== ''){ email = `Email: ${email} ` } else {email = ''}
                 
-                if(phone !== ''){ phone = `Phone: ${phone}` } else {phone = ''}
+                if(phone !== ''){ phone = `Phone: ${phone} ` } else {phone = ''}
 
-                if(claim !== ''){ claim = `Claim: ${claim}` } else {claim = ''}
+                if(claim !== ''){ claim = `Claim: ${claim} ` } else {claim = ''}
 
                 if(other == ''){
                     other = '' 
                 }
 
-                let modifiedText = `***RUSH*** THIS IS A REVERSE MORTGAGE. SET UP A DATE AND TIME TO MEET AND PROVIDE ACCESS TO FIELD ADJUSTER: ${adjuster}${email}${phone}${claim}${other} IT IS REQUIRED THAT YOU AND THE VISITOR FILL OUT THE ATTACHED SPECIAL APPOINTMENT FORM AND UPLOAD WITH RESULTS. PLEASE TAKE PHOTOS OF: Address photo, Photo of the property being open for the adjuster. Photo of the adjuster and a photo of his ID or business card if possible. Photo of inside the entry of property Photo of property being secured/closed back up. Please only use pages 1-3 of the work order, the rest of the pages after that can be disregarded.`
+                let modifiedText = `***RUSH*** THIS IS A REVERSE MORTGAGE. SET UP A DATE AND TIME TO MEET AND PROVIDE ACCESS TO FIELD ADJUSTER: ${adjuster.trim()} ${email}${phone}${claim}${other} IT IS REQUIRED THAT YOU AND THE VISITOR FILL OUT THE ATTACHED SPECIAL APPOINTMENT FORM AND UPLOAD WITH RESULTS. PLEASE TAKE PHOTOS OF: Address photo, Photo of the property being open for the adjuster. Photo of the adjuster and a photo of his ID or business card if possible. Photo of inside the entry of property Photo of property being secured/closed back up. Please only use pages 1-3 of the work order, the rest of the pages after that can be disregarded.`
                 // console.log(modifiedText);
                 this.$emit('text-changed', modifiedText)
                 // this.$emit('model-data',this.modelValue)

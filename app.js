@@ -3,12 +3,12 @@ const clkApp = Vue.createApp({
     template: 
     /*html*/
     `
-    <label for="clkFile">Please enter your PDF file</label><br>
-    <input @change="getPdfData" type="file" name="clk" id="clkFile" class="mb-2"><br>
+    <label for="clkFile" class="file-label" :class="{ 'mb-2':isChanged }" >Please enter your PDF file</label>
+    <input @change="getPdfData" type="file" name="clk" id="clkFile" class="input-file mb-2"><br>
     
     <div v-if="isChanged" class="container">
 
-            <div class="details">
+            <div class="details mb-2">
                 <custom-input v-for="(field,key) in fields" 
                 :key="key" 
                 :id="field.id"
@@ -18,16 +18,26 @@ const clkApp = Vue.createApp({
             </div>
             
             <div class="instructions">
-
-                <label for="instructions">Instructions</label><br>
-                <textarea name="" id="instructions" class="mb-2" cols="90" rows="8" readonly>{{ originalTextArea }}</textarea>
-                <br>
                 
-                <textarea-input @text-changed="setTextArea"></textarea-input>
+                <div id="textarea" class="items">
+                    <label for="instructions">Instructions</label><br>
+                    <textarea name="instructions" id="instructions" class="mb-2" readonly>{{ originalTextArea }}</textarea>
+                    <br>
+                </div>
 
-                <label for="ins-mod">Custom Instructions</label><br>
-                <textarea name="" id="ins-mod" cols="90" rows="8" readonly>{{ modifiedTextArea }}</textarea>
-                <br>
+                <div id="input-textarea" class="items">
+
+                    <textarea-input @text-changed="setTextArea"></textarea-input>
+
+                </div>
+
+                <div id="mod-textarea" class="items">
+
+                    <label for="ins-mod">Custom Instructions</label><br>
+                    <textarea name="ins-mod" id="ins-mod">{{ modifiedTextArea }}</textarea>
+                    <br>
+
+                </div>
             </div>
         </div>
     
