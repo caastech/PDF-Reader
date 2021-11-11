@@ -1,0 +1,109 @@
+// Imports
+
+// @import url('http://fonts.cdnfonts.com/css/product-sans');
+                
+// Variables
+$dark-green: #02734A;
+$basic-green:#72A603;
+$light-white:#F2ECE4;
+$basic-orange:#F27405;
+$dark-orange:#F25C05;
+
+$small: 10px;
+$x-small:20px;
+$medium: 30px;
+$large: 35px;
+$x-large: 40px;
+
+* {
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+}
+
+body {
+    padding: 10px;
+    font-family: 'Product Sans';
+}
+
+.head-title {
+    
+    color: $dark-green;
+    font-size: $x-small;
+    margin-bottom: $x-small;
+
+    figure {
+        margin: $small 0px;
+        width: 200px;
+        border-bottom: 10px solid $basic-green;
+    }
+}
+
+.main-app {
+    border: 1px dashed $dark-green;
+
+    .file-label {
+        display: inline-block;
+        border-radius: 5px;
+        padding: $x-small;
+        background-color: $basic-orange;
+        color: #fff;
+    }
+
+    .file-label:hover {
+        background-color: $dark-orange;
+        transform: scale(1.03);
+    }
+
+    .input-file {
+        overflow: hidden;
+        height: 1px;
+        width: 1px;
+    }
+
+    .container {
+        border: 1px dashed $basic-orange;
+        
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+
+        label {
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            background-color: $light-white;
+            margin-bottom: $small;
+            border: none;
+            padding: 10px;
+            border-bottom: 2px solid $basic-orange;
+        }
+        .details {
+
+        }
+
+        .instructions {
+            // background-color: $dark-green;
+            display: grid;
+            grid-template-columns: 2fr 1fr 2fr;
+            grid-auto-rows: minmax(300px, auto);
+            // justify-items: center;
+            column-gap: 1em;
+            
+            textarea {
+                width: 100%; 
+                padding: 5px 10px; 
+                height: min(300px);  
+                resize: vertical;
+                border: none;
+                border-left: 5px solid $dark-green;
+                border-radius: 10px;
+            }
+
+            input {
+                width: 100%;
+            }
+        }
+    }
+}

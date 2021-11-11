@@ -12,7 +12,7 @@ clkApp.component('textarea-input',{
     /*html*/
     // adjuster,phone,email,claim,other
     `
-    <div class="mb-2">
+    <div class="input-area">
 
         <!-- Adjuster -->
         <label for="adjuster">Adjuster</label><br>

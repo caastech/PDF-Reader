@@ -8,7 +8,7 @@ const clkApp = Vue.createApp({
     
     <div v-if="isChanged" class="container">
 
-            <div class="details mb-2">
+            <div class="details">
                 <custom-input v-for="(field,key) in fields" 
                 :key="key" 
                 :id="field.id"
