@@ -1,0 +1,17 @@
+{
+  "name": "clk-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+
+  "homepage": "https://caastech.github.io/pdf-reader",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy":"gh-pages -d ."
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "gh-pages": "^3.2.3"
+  }
+}
