@@ -3,11 +3,11 @@ const clkApp = Vue.createApp({
     template: 
     /*html*/
     `
-    <h3>Note {{msg}}</h3>
     <label for="clkFile" class="file-label" :class="{ 'mb-2':isChanged }" >Please enter your PDF file</label>
     <input @change="getPdfData" type="file" name="clk" id="clkFile" class="input-file mb-2"><br>
     
     <div v-if="isChanged" class="container">
+
             <div class="details">
                 <custom-input v-for="(field,key) in fields" 
                 :key="key" 
@@ -47,7 +47,6 @@ const clkApp = Vue.createApp({
 
     data(){
         return{
-            msg: 'Helo',
             fields: [
                 { id:'dueDate', type:'text', title:'Due Date'},
                 { id:'clientPay', type:'text', title:'Client Pay'},
@@ -68,10 +67,10 @@ const clkApp = Vue.createApp({
 
     methods: {
 
-        async getPdfData(event){
+        getPdfData(event){
 
            
-            console.log('Changed', event.target.files[0]);
+            // console.log('Changed', event.target.files[0]);
 
             let file = event.target.files[0];
             //Step 2: Read the file using file reader
@@ -79,7 +78,6 @@ const clkApp = Vue.createApp({
             
             
             
-            let pdfValue = 'Campus';
             fileReader.onload = async function() {
 
                 //Step 4:turn array buffer into typed array
@@ -102,10 +100,10 @@ const clkApp = Vue.createApp({
                 const indexCondition = [2,28,52,65,67]
 
                 //Mapping through the pdf lines
-                pageContent.items.map((item,index) => {
+                pageContent.items.forEach((item,index) => {
 
                     if(item.str !== ''){
-                        console.log(`Index: ${index}, Data: ${item.str}`)
+                        // console.log(`Index: ${index}, Data: ${item.str}`)
                         
                         // Setting indexes to get instructions data
                         if(item.str == 'Code:'){
@@ -152,7 +150,6 @@ const clkApp = Vue.createApp({
 
                                     // Fix Formatting on Array
                                     citySlice.splice(1,1)
-                                    // console.log('City Split 2',citySlice);
                                     
                                     // Add the manual ids for the objects
                                     let manualId = ['city','state','zip']
@@ -216,7 +213,6 @@ const clkApp = Vue.createApp({
                     
                 }
 
-                mountedApp.msg = 'Sopa de Macaou 2.0'
 
                 // Set original instructions to lower case and assign it to the variable to print
                 mountedApp.originalTextArea = pdfLines['instructions'].toLowerCase()             

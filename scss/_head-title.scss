@@ -1,0 +1,69 @@
+.head-title {
+    
+    color: $dark-green;
+    font-size: $x-small;
+    margin-bottom: $x-small;
+
+    transition: font-size 1s;
+
+    figure {
+        position: absolute;
+        background-color: $basic-green;
+        margin: $small 0px;
+        height: $small;
+        transition: width 1s ;
+    }
+
+    .box1 {
+        width: 200px;
+        background-color: $dark-orange;
+    }
+
+    .box2 {
+        width: 200px;
+        background-color: $dark-green;
+    }
+
+    .box3 {
+        width: 200px;
+        background-color: $basic-green;
+    }
+
+    &:hover {
+
+        .box1 {
+            width: 280px;
+            background-color: $dark-orange;
+        }
+    
+        .box2 {
+            width: 240px;
+            background-color: $dark-green;
+        }
+    
+        .box3 {
+            width: 200px;
+            background-color: $basic-green;
+        }
+    }
+
+    @media (max-width:360px) {
+        
+        font-size: 15px;
+        
+        .box1 {
+            width: 280px;
+            background-color: $dark-orange;
+        }
+    
+        .box2 {
+            width: 240px;
+            background-color: $dark-green;
+        }
+    
+        .box3 {
+            width: 200px;
+            background-color: $basic-green;
+        }
+    }
+}
