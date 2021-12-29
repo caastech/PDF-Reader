@@ -70,8 +70,6 @@ const clkApp = Vue.createApp({
         getPdfData(event){
 
            
-            // console.log('Changed', event.target.files[0]);
-
             let file = event.target.files[0];
             //Step 2: Read the file using file reader
             let fileReader = new FileReader();  
@@ -83,7 +81,6 @@ const clkApp = Vue.createApp({
                 //Step 4:turn array buffer into typed array
                 let typedarray = new Uint8Array(this.result);
                 
-                // mountedApp.msg = pageContent.items[0]
                 
                 const doc = await pdfjsLib.getDocument(typedarray).promise // note the use of the property promise
 
@@ -94,50 +91,49 @@ const clkApp = Vue.createApp({
                 let pageContent = await page.getTextContent()
 
                 //Variables to get pdf data
-                let pdfLines = {}
-                let startContent
-                let endContent
-                const indexCondition = [2,28,52,65,67]
-
+                let pdfLines = {};
+                let startContent;
+                let endContent;
+                let lenderCondition = '';
+                const indexCondition = [2,4,9,39,63,65,67]
+                
                 //Mapping through the pdf lines
                 pageContent.items.forEach((item,index) => {
-
                     if(item.str !== ''){
-                        // console.log(`Index: ${index}, Data: ${item.str}`)
+                        console.log(`Index: ${index}, Data: ${item.str}`)
                         
                         // Setting indexes to get instructions data
-                        if(item.str == 'Code:'){
-
-                            startContent = index + 1
+                        if(item.str.includes('PLEASE SCHEDULE')){
+                            // console.log('instructions',index);
+                            startContent = index
                             endContent = index + 14
 
                         }
 
                         //Pushing to the array if the index is correct
                         if(indexCondition.includes(index)){
+                            const NY = ['CLK','SWR','SWM'];
 
-                            switch (index) {
-                                case 2:
-                                    pdfLines['orderNumber'] = item.str
-                                    break;
-                                case 28:
-                                    pdfLines['dueDate'] = item.str.slice(10,20)
-                                    break;
-
-                                case 52:
-                                    pdfLines['lender'] = item.str
-                                    break;
-
-                                case 65:
-                                    pdfLines['address'] = item.str
-                                break;
-
-                                case 67:
-
+                            if(index == 2){
+                                let date = new Date(item.str.slice(15))
+                                date.setDate(date.getDate() + 2)
+                                pdfLines['dueDate'] = `${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`;
+                                // console.log();
+                            }
+                            else if(index == 4){
+                                pdfLines['orderNumber'] = item.str
+                            }
+                            else if(index == 9) {
+                                pdfLines['lender'] = item.str
+                            }
+                            else if(index == 39 && !item.str.startsWith('N')) {
+                                pdfLines['lender'] = `${item.str} ${pdfLines['lender']}`
+                                lenderCondition = item.str
+                            }
+                            if(NY.includes(lenderCondition)){
+                                if(index == 63) {
                                     let citySlice= item.str.split(',')
-        
                                     // console.log('City Splite 1',citySlice);
-                                
                                     citySlice[1].split(' ').map(
                                         word =>{
                                             if(word !== ''){
@@ -161,10 +157,47 @@ const clkApp = Vue.createApp({
                                             }
                                         }
                                     )
-                                    
-                                break;
-
+                                }
+                                else if(index == 65){
+                                    pdfLines['address'] = item.str;
+                                }
+                            }
+                            else {
+                                if(index == 65) {
+                                    try {
+                                        let citySlice= item.str.split(',')
+                                        // console.log('City Splite 1',citySlice);
+                                        citySlice[1].split(' ').map(
+                                            word =>{
+                                                if(word !== ''){
+                                                    // console.log('Second: ',word)
+                                                    citySlice.push(word)
+                                                }
                                 
+                                            }
+                                        )
+
+                                        // Fix Formatting on Array
+                                        citySlice.splice(1,1)
+                                        
+                                        // Add the manual ids for the objects
+                                        let manualId = ['city','state','zip']
+                                        
+                                        citySlice.map(
+                                            (word,index) => {
+                                                if(word !== ''){
+                                                    pdfLines[manualId[index]] = word
+                                                }
+                                            }
+                                        )
+                                    } catch (error) {
+                                      console.log(error);  
+                                    }
+                                    
+                                }
+                                else if(index == 67){
+                                    pdfLines['address'] = item.str;
+                                }
                             }
                             
                             // Set the value of clientPay depending on the State
@@ -197,7 +230,7 @@ const clkApp = Vue.createApp({
                         }
                     }
                 })
-
+                console.log('Results:',pdfLines)
                 pdfLines['instructions'] = ''
 
                 // For loop to set the instructions content
